@@ -1,5 +1,7 @@
-declare module "querrie";
+declare namespace querrie {
+  function queryFilters(params: any, properties: string[] | string): any;
+  function querySelectors(params: any, properties: string[] | string): any;
+  function querySorter(params: any): any;
+}
 
-declare function queryFilters(params: any, properties: string[] | string): any;
-declare function querySelectors(params: any, properties: string[] | string): any;
-declare function querySorter(params: any): any;
+export = querrie;
