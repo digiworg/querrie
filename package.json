@@ -1,6 +1,6 @@
 {
   "name": "querrie",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An assistant to manage request query params for sorting, filtering, selecting and more.",
   "main": "index.js",
   "typings": "index.d.ts",
