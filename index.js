@@ -16,7 +16,9 @@ module.exports = {
     properties.map((property) => {
       fieldsArray.map((field) => {
         if (field === property) {
-          filters[property] = params[property];
+          params[property].includes("{") && params[property].includes("}") 
+            ? filters[property] = JSON.parse(params[property])
+            : filters[property] = params[property];
         }
       });
     });
