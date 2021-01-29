@@ -16,9 +16,9 @@ module.exports = {
     properties.map((property) => {
       fieldsArray.map((field) => {
         if (field === property) {
-          params[property].includes("{") && params[property].includes("}") 
-            ? filters[property] = JSON.parse(params[property])
-            : filters[property] = params[property];
+          params[property].includes("{") && params[property].includes("}")
+            ? (filters[property] = JSON.parse(params[property]))
+            : (filters[property] = params[property]);
         }
       });
     });
@@ -76,13 +76,31 @@ module.exports = {
    *
    * @param params contains req.query.sort.
    */
-  querySorter: (params) => {
+  querySorter: (params, options) => {
     if (params.sort) {
+      if (options.aggregationFormat) {
+        // Declaration spot.
+        let sortFields = [];
+        let sorter = {};
+
+        sortFields = params.sort.split(",");
+
+        sortFields.map((field) => {
+          if (field[0] === "-") {
+            sorter[field.slice(1, field.length)] = -1;
+          } else {
+            sorter[field] = 1;
+          }
+        });
+
+        return sorter;
+      }
+
       let sortFields = params.sort.split(",");
       let sorter = sortFields.join(" ");
       return sorter;
     }
 
     return {};
-  }
+  },
 };
