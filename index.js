@@ -78,22 +78,24 @@ module.exports = {
    */
   querySorter: (params, options) => {
     if (params.sort) {
-      if (options.aggregationFormat) {
-        // Declaration spot.
-        let sortFields = [];
-        let sorter = {};
+      if (options) {
+        if (options.aggregationFormat) {
+          // Declaration spot.
+          let sortFields = [];
+          let sorter = {};
 
-        sortFields = params.sort.split(",");
+          sortFields = params.sort.split(",");
 
-        sortFields.map((field) => {
-          if (field[0] === "-") {
-            sorter[field.slice(1, field.length)] = -1;
-          } else {
-            sorter[field] = 1;
-          }
-        });
+          sortFields.map((field) => {
+            if (field[0] === "-") {
+              sorter[field.slice(1, field.length)] = -1;
+            } else {
+              sorter[field] = 1;
+            }
+          });
 
-        return sorter;
+          return sorter;
+        }
       }
 
       let sortFields = params.sort.split(",");
